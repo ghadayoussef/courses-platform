@@ -61,6 +61,11 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                        <input type="radio" name="job" value="teacher"> Teacher<br>
+                        <input type="radio" name="job" value="supporter"> Supporter<br>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

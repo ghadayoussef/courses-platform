@@ -21,8 +21,8 @@ class CreateCoursesTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
-            $table->unsignedBigInteger('teacher_id');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

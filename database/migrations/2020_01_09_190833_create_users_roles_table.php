@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupportersTable extends Migration
+class CreateUsersRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateSupportersTable extends Migration
      */
     public function up()
     {
-        Schema::create('supporters', function (Blueprint $table) {
+        Schema::create('users_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('SSN');
-            $table->string('avatar');
-            //$table->stting('role');
-            // $table->unsignedBigInteger('role');
-            // $table->
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateSupportersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supporters');
+        Schema::dropIfExists('users_roles');
     }
 }
