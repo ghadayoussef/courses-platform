@@ -28,9 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {  
-        $role = Role::create(['name' => 'Admin']);
-        //$permission=
-        $role->givePermissionTo(Permission::all());
+        //dd(auth()->user()->getRoleNames());
+        //dd(auth()->user()->hasRole('Teacher'));
+        
+
         return view('home');
     }
 }

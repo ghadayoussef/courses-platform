@@ -14,7 +14,7 @@ class RoleTableSeeder extends Seeder
     public function run()
     { 
        $role_teacher = Role::create(['name'=>'Teacher']);
-       $role_teacher->givePermisionTo(['view courses', 
+       $role_teacher->givePermissionTo(['view courses', 
        'create course', 
        'edit course', 
        'delete course',
@@ -25,6 +25,7 @@ class RoleTableSeeder extends Seeder
        'ban supporter',
        'approve/dissaprove comment']);
        $role_supporter = Role::create(['name'=>'Supporter']);
+       $role_supporter->givePermissionTo(['view courses','approve/dissaprove comment']);
 
     }
 }

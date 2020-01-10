@@ -15,6 +15,9 @@
                     @endif
 
                     You are logged in!
+                    @role('Teacher')
+                    <p>hiiiiiiiiii</p>
+                    @endrole
                 </div>
             </div>
         </div>

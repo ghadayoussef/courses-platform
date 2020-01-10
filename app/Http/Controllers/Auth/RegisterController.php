@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,13 +67,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //dd($data['job']);
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        // $user->role()->attach($data['role']);
-         return $user;
+        //$user->role()->attach($data['role']);
+        if($data['job']=='Teacher')
+        {
+            $user->assignRole('Teacher');
+            dd($user->getAllPermissions());
+            return $user;
+        }
+        else if($data['job']=='Supporter')
+        {
+            $user->assignRole('Supporter');
+            dd($user->getAllPermissions());
+            return $user;
+        }
+        
+        
 
     }
 }
