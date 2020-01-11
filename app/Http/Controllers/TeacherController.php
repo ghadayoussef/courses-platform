@@ -4,60 +4,76 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Requests\StoreUserRequest;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 class TeacherController extends Controller
 {
     function index()
     {
-        return view('teachers.index',['teachers' => User::all()]);
-        //return view('teachers.index',['teachers' => User::where('role','=','teacher')]);
+        return view('teachers.index',['teachers' => User::where('role','Teacher')->get()]);
     }
     //form for teacher 
     function create(){
-        return view('users.create');
+        return view('teachers.create');
     }
+
     function store(StoreUserRequest $request){
         $teacher = new User();
         $teacher->name = $request->name;
-        $techer->email = $request->email;
-        $techer->user_id = $request->teacher()->id;
-        if ($request->hasFile('image')) {
-            $file = $request->image;
+        $teacher->email = $request->email;
+        $teacher->password = $request->password;
+        $teacher->national_id = $request->national_id;
+        $teacher->role = "Teacher";
+        $teacher->assignRole('Teacher');
+        if ($request->hasFile('avatar')) {
+            $file = $request->avatar;
             $extension = $file->getClientOriginalExtension();
             $filename = time(). "." .$extension;
             $file->move("uploads/teacher/",$filename);
-            $teacher->image = $filename;
+            $teacher->avatar = $filename;
         }else{
            
-            $teacher->image = "";
+            $teacher->avatar = "";
         }
         $teacher->save();
         return redirect()->route('teachers.index');
         }
+
         function show($id){
             $teacher = User::find($id);
-            return view('techers.show',['teacher' =>$teacher]);
+            return view('teachers.show',['teacher' =>$teacher]);
         }
+
         function destroy($id){
             $teacher = User::destroy($id);
-           return redirect()->route('teachers.index');
+            return redirect()->route('teachers.index');
         }
+
         function edit($id){
-            $post = User::find($id);
+            $teacher = User::find($id);
             return view('teachers.edit',['teacher' => $teacher]);
             
         }
+
         function update(StoreUserRequest $request,$id){
-            $teachre = User::find($id)->firstOrFail();
-            $teacher->update(['name' => $request->title,
-                            'email' => $request->content]);
-    
-            return redirect()->route('teachers.index');
-    
+            $teacher = User::findOrFail($id);
+            $teacher->name = $request->name;
+            $teacher->email = $request->email;
+            $teacher->password = $request->password;
+            $teacher->national_id = $request->national_id;
+            $teacher->role = "Teacher";
+            $teacher->assignRole('Teacher');
+            if ($request->hasFile('avatar')) {
+                $file = $request->avatar;
+                $extension = $file->getClientOriginalExtension();
+                $filename = time(). "." .$extension;
+                $file->move("uploads/teacher/",$filename);
+                $teacher->avatar = $filename;
+            }
+            $teacher->save();
+            //dd($request->avatar);
+            return redirect()->route('teachers.index');    
         }
-        function upload(StoreUserRequest $request){
-
-            $this->validate($request,['select_file' =>'required|image|mimes:jpeg,jpg,png,gif|max:2048']);
-            $image = $request->file('select_file');
-        }
-
 }

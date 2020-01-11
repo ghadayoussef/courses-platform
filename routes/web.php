@@ -17,20 +17,16 @@ Route::get('/', function () {
 Route::get('/home',function () {
     return view('/layouts/app');
 });
-// Route::get('/home',function () {
-//     return view('/layouts/dashboard');
-// });
-//Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
 
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
-    Route::get('teachers/create','PostController@create')->name('posts.create');
-//     // Route::post('posts','PostController@store');
-//     // Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
-//     // Route::get('/posts/{post}/edit','PostController@edit')->name('posts.edit');
-//     // Route::delete('/post/{post}','PostController@destroy')->name('posts.destroy');
-//     // Route::patch('/post/{post}','PostController@update')->name('posts.update');
- });
+    Route::get('teachers/create','TeacherController@create')->name('teachers.create');
+    Route::post('teachers','TeacherController@store');
+    Route::get('/teachers/{teacher}', 'TeacherController@show')->name('teachers.show');
+    Route::delete('/teacher/{teacher}','TeacherController@destroy')->name('teachers.destroy');
+    Route::get('/teachers/{teacher}/edit','TeacherController@edit')->name('teachers.edit');
+    Route::patch('/teacher/{teacher}','TeacherController@update')->name('teachers.update');
+});
 
 
 Auth::routes();

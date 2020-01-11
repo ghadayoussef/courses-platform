@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<form method="POST" action="/posts" enctype="multipart/form-data">
+<form method="POST" action="/teachers" enctype="multipart/form-data">
 @csrf
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -11,7 +11,7 @@
         </ul>
     </div>
 @endif
-  <div class="form-group">Title
+  <div class="form-group">
     <label for="exampleFormControlInput1">Name</label>
     <input type="text" class="form-control"  name="name" placeholder="name">
   </div>
@@ -19,12 +19,17 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Email</label>
-    <textarea class="form-control" id="content" rows="3" name="email" placeholder="email"></textarea>
+    <input type="text" class="form-control" name="email" placeholder="email">
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Password</label>
-    <unput type="passw" class="form-control" id="content" rows="3" name="password" placeholder="password"></textarea>
+    <input type="password" class="form-control" name="password" placeholder="password">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">National ID</label>
+    <input type="number" class="form-control" name="national_id" placeholder="National ID">
   </div>
 
   <div class="form-group" >
