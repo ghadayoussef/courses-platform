@@ -15,8 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home',function () {
-    return view('/layouts/dashboard');
+    return view('/layouts/app');
 });
+// Route::get('/home',function () {
+//     return view('/layouts/dashboard');
+// });
+//Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
+    Route::get('teachers/create','PostController@create')->name('posts.create');
+//     // Route::post('posts','PostController@store');
+//     // Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+//     // Route::get('/posts/{post}/edit','PostController@edit')->name('posts.edit');
+//     // Route::delete('/post/{post}','PostController@destroy')->name('posts.destroy');
+//     // Route::patch('/post/{post}','PostController@update')->name('posts.update');
+ });
+
 
 Auth::routes();
 
