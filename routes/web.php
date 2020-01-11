@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home',function () {
-    return view('/layouts/dashboard');
+    return view('/supporters/index');
 });
-
+Route::get('/supporters','SupporterController@index');
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+
