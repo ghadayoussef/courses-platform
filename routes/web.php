@@ -17,7 +17,10 @@ Route::get('/', function () {
 Route::get('/home',function () {
     return view('/supporters/index');
 });
-Route::get('/supporters','SupporterController@index');
+Route::get('/supporters','SupporterController@index')->name('supporters.index');
+Route::get('/supporters/{supporter}','SupporterController@show');
+Route::delete('/supporters/{supporter}','SupporterController@destroy');
+
 Auth::routes();
 
 

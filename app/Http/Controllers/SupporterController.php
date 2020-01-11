@@ -15,6 +15,17 @@ class SupporterController extends Controller
         return view('supporters.index', ['supporters' =>  $supporters]);
 
     }
+    public function destroy($id){
+        
+        $supporter = User::findOrFail($id);
+        $supporter->delete();
+        return redirect()->route('supporters.index');
+
+    }
+    public function show($id){
+        $supporter = User::findOrFail($id);
+
+    }
 
   
 }

@@ -50,8 +50,12 @@
                   <td> {{$supporter['National ID']}}</td>
                   <td> </td>
                   <td> 
-                  <button type="submit" class="btn btn-danger " onclick='return confirm("Are you sure to delete this post?");'>Delete </button>
+                  <form  method="post" action="/supporters/{{$supporter['id']}}">
+                  @csrf
+                 @method('delete')
                   <a href="#" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Edit</a> 
+                  <button type="submit" class="btn btn-danger " onclick='return confirm("Are you sure to delete this post?");'>Delete </button>
+                  </form>
                   </td>
 
                 </tr>
