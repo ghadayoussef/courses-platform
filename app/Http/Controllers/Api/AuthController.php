@@ -19,7 +19,7 @@ class AuthController extends Controller
         'password' => bcrypt($request->password),
         'gender' => $request->gender,
         'DOB' => date('Y-m-d',strtotime($request->birthdate)),
-        'avatar'=> $request->src
+        'avatar'=> $request->avatar
       ]);
 
       $token = auth('api')->login($student);
