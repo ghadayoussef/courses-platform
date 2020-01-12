@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Student;
+use App\Course;
+use App\Notifications\CourseEnrolled;
 
 class StudentController extends Controller
 {
@@ -26,7 +28,29 @@ class StudentController extends Controller
 
     $student->id = $request->user()->id;
     $student->save();
-    return response()->json(['message'=>'Profile Updated Successfully', $student]);
-    
+    return response()->json(['message'=>'Profile Updated Successfully','student_info'=> $student]);
+
 }
+
+public function showCourses(){
+    $courses = Course::all();
+    return $courses;
+}
+
+public function enroll(request $request,$courseId){
+    $course = Course::find($courseId);
+    $student = $request->user();
+    $student->courses()->attach($courseId);
+    $student->notify(new CourseEnrolled($course));
+    return response(['message'=>'Successfully enrolled in '.$course->name.' Course. Please check your email.']);
+
+}
+
+public function enrolledCourses(request $request){
+    $student = $request->user();
+    $courses = $student->courses()->get();
+    return $courses;
+}
+
+
 }

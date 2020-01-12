@@ -25,7 +25,10 @@ Route::post('login', 'Api\AuthController@login');
 Route::get('logout', 'Api\AuthController@logout');
 Route::get('user', 'Api\AuthController@getAuthStudent')->middleware('auth:api','verified');
 
-Route::put('update', 'Api\StudentController@update') -> middleware('auth:api','verified'); ///{} this means a dynamic content : variable that takes its value from the entered url
+Route::put('update', 'Api\StudentController@update') -> middleware('auth:api','verified'); 
+Route::get('courses', 'Api\StudentController@showCourses') -> middleware('auth:api','verified'); 
+Route::post('courses/{course}/enroll', 'Api\StudentController@enroll') -> middleware('auth:api','verified'); 
+Route::get('courses/enrolled', 'Api\StudentController@enrolledCourses') -> middleware('auth:api','verified'); 
 
 
 
