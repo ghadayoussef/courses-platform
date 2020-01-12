@@ -17,7 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', 'AuthController@register');
-Route::post('login', 'AuthController@login');
-Route::get('logout', 'AuthController@logout');
-Route::get('user', 'AuthController@getAuthStudent')->middleware('auth:api');
+Auth::routes(['verify' => true]);
+
+
+Route::post('register', 'Api\AuthController@register');
+Route::post('login', 'Api\AuthController@login');
+Route::get('logout', 'Api\AuthController@logout');
+Route::get('user', 'Api\AuthController@getAuthStudent')->middleware('auth:api','verified');
+
+Route::get('/email/resend', 'Api\VerificationController@resend')->name('verification.resend');
+Route::get('/email/verify/{id}/{hash}', 'Api\VerificationController@verify')->name('verification.verify');
