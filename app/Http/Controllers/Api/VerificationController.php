@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Access\AuthorizationException;
 Use App\Student;
+use App\Notifications\WelcomeEmail;
+
 class VerificationController extends Controller
 {
     /*
@@ -78,6 +80,8 @@ class VerificationController extends Controller
         }
         if ($student->markEmailAsVerified()) {
             event(new Verified($student));
+            $student->notify(new WelcomeEmail($student));
+
         }
         return response(['message'=>'Successfully verified']);
     }
