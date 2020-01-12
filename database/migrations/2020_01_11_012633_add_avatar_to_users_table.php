@@ -15,8 +15,8 @@ class AddAvatarToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-         $table->string('Avatar')->nullable();
-         $table->bigInteger('National ID');
+         $table->string('avatar')->nullable();
+         $table->bigInteger('national_id');
 
         });
     }

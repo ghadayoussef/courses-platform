@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            
         ]);
     }
 
@@ -67,23 +68,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //dd($data['job']);
+       
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role'=> $data['role'],
+            'national_id'=>$data['national_id'],
         ]);
         //$user->role()->attach($data['role']);
-        if($data['job']=='Teacher')
+    if($data['role']=='Teacher')
         {
             $user->assignRole('Teacher');
-            dd($user->getAllPermissions());
+            //dd($user->getAllPermissions());
             return $user;
         }
-        else if($data['job']=='Supporter')
+        else if($data['role']=='Supporter')
         {
             $user->assignRole('Supporter');
-            dd($user->getAllPermissions());
+            //dd($user->getAllPermissions());
             return $user;
         }
         

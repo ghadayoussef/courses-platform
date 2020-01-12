@@ -21,13 +21,11 @@
 
     <!-- Main content -->
     <section class="content">
+    <a href="/supporters/create" class="btn btn-success " tabindex="-1" role="button" aria-disabled="true">Add Supporter</a> 
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
-            </div>
-            <!-- /.card-header -->
+           
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
@@ -47,13 +45,13 @@
                   <td> {{$supporter['name']}}
                   </td>
                   <td>{{$supporter['email']}}</td>
-                  <td> {{$supporter['National ID']}}</td>
+                  <td> {{$supporter['national_id']}}</td>
                   <td> </td>
                   <td> 
                   <form  method="post" action="/supporters/{{$supporter['id']}}">
                   @csrf
-                 @method('delete')
-                  <a href="#" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Edit</a> 
+                  @method('delete')
+                  <a href="/supporters/{{$supporter['id']}}/edit" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Edit</a> 
                   <button type="submit" class="btn btn-danger " onclick='return confirm("Are you sure to delete this post?");'>Delete </button>
                   </form>
                   </td>
@@ -71,7 +69,7 @@
 @section('supporters')
 @foreach($supporters as $supporter)
 <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="/supporters/{{$supporter['id']}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{$supporter['name']}}</p>
                 </a>

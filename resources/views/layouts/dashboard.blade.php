@@ -33,6 +33,7 @@ to get the desired effect
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
+    
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
@@ -42,8 +43,14 @@ to get the desired effect
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
-    </ul>
+   
+    <li class=" nav-item d-none d-sm-inline-block dropdown-menu dropdown-menu-right bg-secondary" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item " href="{{ route('logout') }}"  onclick="event.preventDefault();    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}</a>
+ <form lass="form-inline ml-3" id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                         @csrf</form> </li>
 
+         </ul>
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
@@ -225,7 +232,7 @@ to get the desired effect
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="{{action('SupporterController@index')}}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Supporters
@@ -233,6 +240,12 @@ to get the desired effect
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/supporters" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Show All supporters</p>
+                </a>
+              </li>
             @yield('supporters')
              
             </ul>
@@ -640,9 +653,17 @@ to get the desired effect
     </div>
     <!-- /.sidebar -->
   </aside>
-  
 
-@yield('content')
+    <!-- Main content -->
+  <div class="content-wrapper">
+    <div class="content">
+     @yield('content')
+      
+    </div>
+    <!-- /.content -->
+  </div>
+
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -657,7 +678,7 @@ to get the desired effect
       <b>Version</b> 3.0.1
     </div>
   </footer>
-</div>
+
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
