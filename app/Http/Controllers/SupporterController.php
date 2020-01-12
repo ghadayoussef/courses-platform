@@ -22,6 +22,12 @@ class SupporterController extends Controller
     function destroy($id){
         
         $supporter = User::findOrFail($id);
+        if($upporter['image'])
+        {
+            
+        unlink(public_path()."/storage/".$supporter['image']); //delete image from storage
+      
+        }
         $supporter->delete();
         return redirect()->route('supporters.index');
 
