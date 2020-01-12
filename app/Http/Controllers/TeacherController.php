@@ -22,7 +22,7 @@ class TeacherController extends Controller
         $teacher = new User();
         $teacher->name = $request->name;
         $teacher->email = $request->email;
-        $teacher->password = $request->password;
+        $teacher->password = bcrypt($request->password);
         $teacher->national_id = $request->national_id;
         $teacher->role = "Teacher";
         $teacher->assignRole('Teacher');
@@ -60,7 +60,7 @@ class TeacherController extends Controller
             $teacher = User::findOrFail($id);
             $teacher->name = $request->name;
             $teacher->email = $request->email;
-            $teacher->password = $request->password;
+            $teacher->password = bcrypt($request->password);
             $teacher->national_id = $request->national_id;
             $teacher->role = "Teacher";
             $teacher->assignRole('Teacher');

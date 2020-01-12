@@ -19,7 +19,7 @@
     <label for="exampleFormControlInput1">National ID</label>
     <input type="text" class="form-control" name="national_id" value="{{$teacher->national_id}}"/>
     <label for="exampleFormControlInput1">Password</label>
-    <input type="text" class="form-control" name="password" value="{{$teacher->password}}"/>
+    <input type="password" class="form-control" name="password" value="{{$teacher->password}}"/>
     <div class="form-group">
         <div class = "custom-file">
         <input type="file" class="custom-file-input" name="avatar" value="{{ $teacher->avatar }}"><br>

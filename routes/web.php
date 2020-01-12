@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +9,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//use Illuminate\Routing\Route;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,7 +19,8 @@ Route::get('/home',function () {
 // Route::get('/chart',function(){
 //     return view('/charts/google_pie_chart');
 // });
-Route::group(['middleware'=>'auth'],function(){
+//Route::get('/teachers', 'TeacherController@index')->middleware('role:Admin')->name('teachers.index');
+Route::group(['middleware'=>['auth','role:Admin']],function(){
     Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
     Route::get('teachers/create','TeacherController@create')->name('teachers.create');
     Route::post('teachers','TeacherController@store');
