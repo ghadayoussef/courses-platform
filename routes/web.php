@@ -22,17 +22,19 @@ Route::get('/home',function () {
 // });
 //Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
 
-Route::group(['middleware'=>'auth'],function(){
-    Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
-    Route::get('teachers/create','PostController@create')->name('posts.create');
-//     // Route::post('posts','PostController@store');
-//     // Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
-//     // Route::get('/posts/{post}/edit','PostController@edit')->name('posts.edit');
-//     // Route::delete('/post/{post}','PostController@destroy')->name('posts.destroy');
-//     // Route::patch('/post/{post}','PostController@update')->name('posts.update');
+
+
+ Auth::routes();
+
+ Route::group(['middleware'=>'auth'], function(){
+    Route::get('/courses','CourseController@index')->name('courses.index');
+    Route::get('/courses/create' ,'CourseController@create')->name('courses.create');
+    Route::post('/courses', 'CourseController@store')->name('courses.store');
+    Route::get('/courses/{course}','CourseController@show')-> name('courses.show');
+    Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.destroy');
+    Route::get('/courses/{course}/edit','CourseController@edit')->name('courses.edit');
+    Route::patch('/courses/{course}','CourseController@update')->name('courses.update');
  });
 
 
-Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
