@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,6 +7,9 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Course;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+
+
 class SupporterController extends Controller
 {  
      function index(){
@@ -33,15 +35,24 @@ class SupporterController extends Controller
      function create(){
         return view('supporters.create');
     }
-    function store(){
+    function store(Request $request){
+       
+
         $supporter=User::create([
             'name'=>request()->name,
             'email'=>request()->email,
             'national_id'=>request()->national_id,
-            'password'=>request()->password,
+            'password'=> Hash::make(request()->password),
             'role'=>'Supporter'
 
         ]);
+
+        if(request()->avatar){
+            $supporter->update(['image'=>$request->file('avatar')->store('uploads','public')]);
+            }
+          else
+          $supporter->update(['image'=>'/storage/uploads/default.jpeg']);
+       
         $supporter->assignRole('Supporter');
         $course= Course::get()->where('name',request()->assign_supporter);
         $supporter->courses()->sync($course);
@@ -50,18 +61,31 @@ class SupporterController extends Controller
     
     }
     function edit($id){
-        
+
         $supporter = User::findOrFail($id);
         return view('supporters.edit',['supporter' =>  $supporter]);
 
     }
     
     function update($id){
+
         $supporter = User::findOrFail($id);
         $supporter->name=request()->name;
         $supporter->email=request()->email;
         $supporter->national_id=request()->national_id;
         $supporter->password=request()->password;
+        if(request()->avatar){
+            unlink(public_path()."/storage/".$supporter['avatar']);
+            $supporter->update(['avatar'=>request()->file('avatar')->store('uploads','public')]);
+         }
+        else{
+            if($supporter->avatar){
+            unlink(public_path()."/storage/".$supporter['avatar']); 
+        }
+        else
+          $supporter->update(['image'=>'/storage/uploads/default.jpeg']);
+    
+    }
         $supporter->save();
         return redirect()->route('supporters.index');
 

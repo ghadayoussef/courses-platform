@@ -46,7 +46,14 @@
                   </td>
                   <td>{{$supporter['email']}}</td>
                   <td> {{$supporter['national_id']}}</td>
-                  <td> </td>
+                  <td> 
+                  @if($supporter['image'])
+                  <img src="{{(asset('storage/'.$supporter['image']))}}"style="width: 150px; height: 150px ;float:right" >
+                 @else
+                 <img src="{{ asset('/storage/uploads/default.jpeg') }}"style="width: 150px; height: 150px ;float:right" >
+
+                  @endif
+                  </td>
                   <td> 
                   <form  method="post" action="/supporters/{{$supporter['id']}}">
                   @csrf
@@ -66,13 +73,4 @@
   </div>
 
 @endsection
-@section('supporters')
-@foreach($supporters as $supporter)
-<li class="nav-item">
-                <a href="/supporters/{{$supporter['id']}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>{{$supporter['name']}}</p>
-                </a>
-              </li>
-@endforeach
-@endsection
+

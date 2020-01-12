@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
-<form method="POST" action="/supporters/{{$supporter['id']}}">
+<form method="POST" action="/supporters/{{$supporter['id']}}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -64,6 +64,10 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="form-group">
+                                        <label for="image"> Attach image</label>
+                                        <input type="file" class="form-control-file" name="image" >
+                                    </div>
                         <div class="form-group row">
                             <label for="assign-course" class="col-md-4 col-form-label text-md-right">{{ __('Assign Supporter To Course') }}</label>
                             <div class="col-md-6">
