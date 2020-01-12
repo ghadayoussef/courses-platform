@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use File;
 use App\Http\Requests\StoreUserRequest;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
@@ -34,7 +36,8 @@ class TeacherController extends Controller
             $teacher->avatar = $filename;
         }else{
            
-            $teacher->avatar = "";
+            $teacher->avatar = "default.png";
+
         }
         $teacher->save();
         return redirect()->route('teachers.index');
@@ -64,13 +67,18 @@ class TeacherController extends Controller
             $teacher->national_id = $request->national_id;
             $teacher->role = "Teacher";
             $teacher->assignRole('Teacher');
-            if ($request->hasFile('avatar')) {
+            if($request->avatar){
+                if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $extension = $file->getClientOriginalExtension();
                 $filename = time(). "." .$extension;
                 $file->move("uploads/teacher/",$filename);
                 $teacher->avatar = $filename;
-            }
+                }
+            else{
+                $teacher->avatar = "default.png";
+                }
+            }            
             $teacher->save();
             return redirect()->route('teachers.index');    
         }
