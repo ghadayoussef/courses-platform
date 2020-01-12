@@ -25,8 +25,6 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => ['required'|Rule::unique('users', 'name')->ignore($this->id)],
-            // 'email' => ['required'|Rule::unique('users', 'email')->ignore($this->id)],
             'name' => 'required|unique:users,name,'.$this->teacher.'|min:3',
             'email' => 'required|unique:users,email,'.$this->teacher.'|min:10',
             'avatar' => 'required|image|mimes:gif,png,jpeg,jpg'

@@ -14,7 +14,6 @@ class TeacherController extends Controller
     {
         return view('teachers.index',['teachers' => User::where('role','Teacher')->get()]);
     }
-    //form for teacher 
     function create(){
         return view('teachers.create');
     }
@@ -73,7 +72,6 @@ class TeacherController extends Controller
                 $teacher->avatar = $filename;
             }
             $teacher->save();
-            //dd($request->avatar);
             return redirect()->route('teachers.index');    
         }
 }

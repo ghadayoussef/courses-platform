@@ -17,7 +17,9 @@ Route::get('/', function () {
 Route::get('/home',function () {
     return view('/layouts/dashboard');
 });
-
+// Route::get('/chart',function(){
+//     return view('/charts/google_pie_chart');
+// });
 Route::group(['middleware'=>'auth'],function(){
     Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
     Route::get('teachers/create','TeacherController@create')->name('teachers.create');
@@ -28,6 +30,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::patch('/teacher/{teacher}','TeacherController@update')->name('teachers.update');
 });
 
+Route::get('/chart','LaravelGoogleGraph@index');
 
 Auth::routes();
 
