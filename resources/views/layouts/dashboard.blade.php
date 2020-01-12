@@ -246,7 +246,8 @@ to get the desired effect
                   <p>Show All supporters</p>
                 </a>
               </li>
-            @yield('supporters')
+              @php
+              print_r(add_supporters_to_sidebar());@endphp
              
             </ul>
           </li>
