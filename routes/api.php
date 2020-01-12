@@ -29,6 +29,7 @@ Route::put('update', 'Api\StudentController@update') -> middleware('auth:api','v
 Route::get('courses', 'Api\StudentController@showCourses') -> middleware('auth:api','verified'); 
 Route::post('courses/{course}/enroll', 'Api\StudentController@enroll') -> middleware('auth:api','verified'); 
 Route::get('courses/enrolled', 'Api\StudentController@enrolledCourses') -> middleware('auth:api','verified'); 
+Route::post('courses/{id}/comment', 'Api\StudentController@comment') -> middleware('auth:api','verified'); 
 
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Student;
 use App\Course;
+use App\Comment;
 use App\Notifications\CourseEnrolled;
 
 class StudentController extends Controller
@@ -52,5 +53,16 @@ public function enrolledCourses(request $request){
     return $courses;
 }
 
+public function comment(request $request,$courseId){
+    $course = Course::find($courseId);
+    $student = $request->user();
+    $comment= Comment::create([
+        'body' => $request->comment,
+        'student_id' => $student->id,
+        'course_id' => $course->id,
+        'status' => 0,
+      ]);
+return response(['message'=>'Your comment has been sent and waiting for approval']) ;
+}
 
 }
