@@ -21,7 +21,9 @@
 
     <!-- Main content -->
     <section class="content">
+    @role('Admin|Teacher')
     <a href="/supporters/create" class="btn btn-success " tabindex="-1" role="button" aria-disabled="true">Add Supporter</a> 
+      @endrole
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -35,7 +37,9 @@
                   <th>Email</th>
                   <th>National ID</th>
                   <th>Avatar</th>
+                  @role('Admin|Teacher')
                   <th>Actions</th>
+                   @endrole
                 </tr>
                 </thead>
                 <tbody>
@@ -54,14 +58,15 @@
 
                   @endif
                   </td>
+                  @role('Admin|Teacher')
                   <td> 
-                  <form  method="post" action="/supporters/{{$supporter['id']}}">
-                  @csrf
-                  @method('delete')
+                  <form>
                   <a href="/supporters/{{$supporter['id']}}/edit" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Edit</a> 
-                  <button type="submit" class="btn btn-danger " onclick='return confirm("Are you sure to delete this post?");'>Delete </button>
+                  <meta name="csrf-token" content="{{ csrf_token() }}">
+                  <button  class="btn btn-danger deleteRecord" data-id={{$supporter['id']}} onclick='return confirm("Are you sure to delete this User?");'>Delete </button>
                   </form>
                   </td>
+                  @endrole
 
                 </tr>
                 @endforeach
@@ -71,6 +76,30 @@
     </section>
     <!-- /.content -->
   </div>
+  
+
 
 @endsection
-
+@section('scripts')
+<script >
+ $(".deleteRecord").click(function(){
+    var id = $(this).data("id");
+    var token = $("meta[name='csrf-token']").attr("content");
+   
+    $.ajax(
+    {
+        url: "/supporters/"+id,
+        type: 'DELETE',
+        data: {
+            "id": id,
+            "_token": token,
+        },
+        success: function (){
+          console.log("it Works");
+        }
+    });
+   
+});
+  
+</script>
+@endsection

@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Hash;
 class SupporterController extends Controller
 {  
      function index(){
-        $supporter = User::findOrFail(12);
+       
         $supporters = User::get()->where('role','Supporter');
-    
+
         return view('supporters.index', ['supporters' =>  $supporters]);
 
     }
     function destroy($id){
         
         $supporter = User::findOrFail($id);
-        if($upporter['image'])
+        if($supporter['image'])
         {
             
         unlink(public_path()."/storage/".$supporter['image']); //delete image from storage
