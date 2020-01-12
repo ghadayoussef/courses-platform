@@ -150,6 +150,7 @@ to get the desired effect
     </ul>
   </nav>
   <!-- /.navbar -->
+  
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -657,6 +658,13 @@ to get the desired effect
     <!-- /.sidebar -->
   </aside>
 
+  <div class="content-wrapper">
+    <div class="content">
+      
+      @yield('content')
+    </div>
+  </div>
+
 
 
   <!-- Control Sidebar -->
@@ -665,6 +673,8 @@ to get the desired effect
   </aside>
   <!-- /.control-sidebar -->
 
+  
+  
   <!-- Main Footer -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>

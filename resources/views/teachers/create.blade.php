@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('content')
 <form method="POST" action="/teachers" enctype="multipart/form-data">
 @csrf
