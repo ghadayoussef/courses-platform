@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Course;
 use App\Comment;
+use App\User;
 use App\Notifications\CourseEnrolled;
+use App\Http\Resources\CourseResource;
+
 
 class StudentController extends Controller
 {
@@ -34,8 +37,7 @@ class StudentController extends Controller
 }
 
 public function showCourses(){
-    $courses = Course::all();
-    return $courses;
+    return CourseResource::collection(Course::all());
 }
 
 public function enroll(request $request,$courseId){
@@ -48,9 +50,8 @@ public function enroll(request $request,$courseId){
 }
 
 public function enrolledCourses(request $request){
-    $student = $request->user();
-    $courses = $student->courses()->get();
-    return $courses;
+    $courses = $request->user()->courses()->get();
+    return CourseResource::collection($courses);
 }
 
 public function comment(request $request,$courseId){
@@ -62,7 +63,7 @@ public function comment(request $request,$courseId){
         'course_id' => $course->id,
         'status' => 0,
       ]);
-return response(['message'=>'Your comment has been sent and waiting for approval']) ;
+return response(['message'=>'Your comment has been sent and awaiting for approval']) ;
 }
 
 }
