@@ -12,6 +12,7 @@ use App\Notifications\CourseEnrolled;
 use App\Http\Resources\CourseResource;
 
 
+
 class StudentController extends Controller
 {
     function update (Request $request){
@@ -37,10 +38,12 @@ class StudentController extends Controller
 }
 
 public function showCourses(){
+
     return CourseResource::collection(Course::all());
 }
 
 public function enroll(request $request,$courseId){
+
     $course = Course::find($courseId);
     $student = $request->user();
     $student->courses()->attach($courseId);
@@ -55,6 +58,7 @@ public function enrolledCourses(request $request){
 }
 
 public function comment(request $request,$courseId){
+    
     $course = Course::find($courseId);
     $student = $request->user();
     $comment= Comment::create([
