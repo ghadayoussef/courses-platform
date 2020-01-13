@@ -49,6 +49,7 @@ class TeacherController extends Controller
         }
 
         function destroy($id){
+            dd("hi");
             $teacher = User::destroy($id);
             return redirect()->route('teachers.index');
         }

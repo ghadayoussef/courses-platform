@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Email</label>
-    <input type="text" class="form-control" name="email" placeholder="email">
+    <input type="email" class="form-control" name="email" placeholder="email">
   </div>
 
   <div class="form-group">

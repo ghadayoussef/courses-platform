@@ -726,6 +726,7 @@ to get the desired effect
     <div class="content">
       
       @yield('content')
+      
     </div>
   </div>
 
@@ -762,5 +763,6 @@ to get the desired effect
 <script src="{{asset('bower_components/admin-lte/plugins/chart.js/Chart.min.js')}}"></script>
 <script src="{{asset('bower_components/admin-lte/dist/js/demo.js')}}"></script>
 <script src="{{asset('bower_components/admin-lte/dist/js/pages/dashboard3.js')}}"></script>
+@yield('scripts')
 </body>
 </html>

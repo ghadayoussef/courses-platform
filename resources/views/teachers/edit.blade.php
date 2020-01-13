@@ -15,7 +15,7 @@
     <label for="exampleFormControlInput1">Name</label>
     <input type="text" class="form-control" name="name" value="{{$teacher->name}}"/>
     <label for="exampleFormControlInput1">Email</label>
-    <input type="text" class="form-control" name="email" value="{{$teacher->email}}"/>
+    <input type="email" class="form-control" name="email" value="{{$teacher->email}}"/>
     <label for="exampleFormControlInput1">National ID</label>
     <input type="text" class="form-control" name="national_id" value="{{$teacher->national_id}}"/>
     <label for="exampleFormControlInput1">Password</label>

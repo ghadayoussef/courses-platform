@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
- @section('content')
+@section('content')
 <form class="form-inline my-2 my-lg-0" method="POST">
   @csrf
   <a class="btn btn-outline-success my-2 my-sm-0" href="{{route('teachers.create')}}" role="button">Create</a>
@@ -25,17 +25,84 @@
       <td><img class="img-thumbnail" style="width:100px;height:100px;" src="{{ asset('uploads/teacher/' . $teacher->avatar) }}" /></td>
       <td>{{$teacher['national_id']}}</td>
         
-      <td>        
+      <!--         
         <form action="{{route('teachers.destroy',['teacher' => $teacher['id']])}}" method="post">
         <a class="btn bg-info" style="align" href="{{route('teachers.edit',['teacher' => $teacher['id']])}}" role="button">Edit</a>
         <a class="btn btn-primary" style="align" href="{{route('teachers.show',['teacher' => $teacher['id']])}}" role="button">Show</a>
-        <button type="submit" class="btn bg-danger" >Delete</button>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <button type="submit" class="btn bg-danger" data-id="{{$teacher['id']}}" id="delete"
+        onclick='return confirm("Are you sure you want to delete this data?")' >Delete</button>
        @method('delete')
        @csrf
-        </form>   
+        </form>  -->
+        <td>
+          <form>
+        <a class="btn bg-info" style="align" href="{{route('teachers.edit',['teacher' => $teacher['id']])}}" role="button">Edit</a>
+        <a class="btn btn-primary" style="align" href="{{route('teachers.show',['teacher' => $teacher['id']])}}" role="button">Show</a>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <button  class="btn btn-danger deleteRecord" data-id= "{{$teacher['id']}}" onclick='return confirm("Are you sure to delete this User?");'>Delete </button>
+        <!-- <meta name="csrf-token" content="{{ csrf_token() }}">
+        <button class="btn bg-danger" data-id="{{$teacher['id']}}" id="delete">Delete</button> -->
+       <!-- @method('delete')
+       
+        @csrf  -->
+            </from>       
       </td> 
     </tr>
     @endforeach
   </tbody>
 </table>
-@endsection('content')
+@endsection
+@section('scripts')
+<script >
+ $(".deleteRecord").click(function(){
+    var id = $(this).data("id");
+    var token = $("meta[name='csrf-token']").attr("content");
+
+    $.ajax(
+    {
+        //url:"{{route('teachers.destroy',['teacher' => 'id'])}}",
+        url: "/teachers/"+$(this).data("id"),
+        type: 'DELETE',
+        data: {
+            "id": $(this).data("id"),
+            "_token": $("meta[name='csrf-token']").attr("content"),
+        },
+        success: function (){
+          console.log("it Works");
+        },
+        error: function() {             
+           alert("errrorrr");
+        }
+    });
+   
+});
+</script>
+@endsection
+
+
+
+
+
+
+<!-- @section('scripts')
+<script>  
+$(#delete).on('click',function(){
+    var id = $(this).data('id');
+    var token = $("meta[name='csrf-token']").attr("content");
+    if(confirm("Are you sure you want to delete this data?")){
+            $.ajax({
+              url:"/teachers/"+id,
+              type: 'DELETE',
+              "data":id,
+              "_token": token,
+              success:function(data){
+                console.log("it Works");
+                //alert(data);               
+              }
+            })
+          }
+        })
+</script>
+@endsection('scripts') -->

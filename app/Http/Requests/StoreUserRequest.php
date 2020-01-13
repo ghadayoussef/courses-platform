@@ -27,7 +27,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required|unique:users,name,'.$this->teacher.'|min:3',
             'email' => 'required|unique:users,email,'.$this->teacher.'|min:10',
-            'avatar' => 'image|mimes:gif,png,jpeg,jpg'.$this->teacher
+            'avatar' => 'image|mimes:jpeg,jpg'.$this->teacher,
+            'password' => 'required|min:6'
         ];
     }
 }
