@@ -51,8 +51,8 @@
                   <td>{{$supporter['email']}}</td>
                   <td> {{$supporter['national_id']}}</td>
                   <td> 
-                  @if($supporter['image'])
-                  <img src="{{(asset('storage/'.$supporter['image']))}}"style="width: 150px; height: 150px ;float:right" >
+                  @if($supporter['avatar'])
+                  <img src="{{(asset('storage/'.$supporter['avatar']))}}"style="width: 150px; height: 150px ;float:right" >
                  @else
                  <img src="{{ asset('/storage/uploads/default.jpeg') }}"style="width: 150px; height: 150px ;float:right" >
 
@@ -61,6 +61,7 @@
                   @role('Admin|Teacher')
                   <td> 
                   <form>
+                  @csrf
                   <a href="/supporters/{{$supporter['id']}}/edit" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Edit</a> 
                   <meta name="csrf-token" content="{{ csrf_token() }}">
                   <button  class="btn btn-danger deleteRecord" data-id={{$supporter['id']}} onclick='return confirm("Are you sure to delete this User?");'>Delete </button>
@@ -106,4 +107,5 @@
 });
   
 </script>
+
 @endsection

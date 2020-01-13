@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,9 +9,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
+
 });
 Route::group(['middleware'=>['auth','role:Admin|Teacher']],function(){
     Route::get('/supporters/create','SupporterController@create')->name('supporters.create');
@@ -35,6 +34,21 @@ Route::get('/supporters/{supporter}','SupporterController@show')->name('supporte
 });
 
 
+Route::group(['middleware'=>['auth','role:Admin']],function(){
+    Route::get('/teachers', 'TeacherController@index')->name('teachers.index');
+    Route::get('teachers/create','TeacherController@create')->name('teachers.create');
+    Route::post('teachers','TeacherController@store');
+    Route::get('/teachers/{teacher}', 'TeacherController@show')->name('teachers.show');
+    Route::delete('/teacher/{teacher}','TeacherController@destroy')->name('teachers.destroy');
+    Route::get('/teachers/{teacher}/edit','TeacherController@edit')->name('teachers.edit');
+    Route::patch('/teacher/{teacher}','TeacherController@update')->name('teachers.update');
+});
+
+
+Route::get('/chart','LaravelGoogleGraph@index');
+Route::get('/ajaxdata','AjaxTeacherController@index');
+Route::get('/ajaxdata/getdata','AjaxTeacherController@getdata')->name('ajaxdata.getdata');//json format
+Route::get('/ajaxdata/removedata/{teacher}','AjaxTeacherController@removedata')->name('ajaxdata.removedata');
 Auth::routes();
 
 

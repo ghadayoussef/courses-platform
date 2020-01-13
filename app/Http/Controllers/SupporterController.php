@@ -23,13 +23,14 @@ class SupporterController extends Controller
     function destroy($id){
         
         $supporter = User::findOrFail($id);
-        if($supporter['image'])
+        if($supporter['avatar'])
         {
             
-        unlink(public_path()."/storage/".$supporter['image']); //delete image from storage
+        unlink(public_path()."/storage/".$supporter['avatar']); //delete image from storage
       
         }
         $supporter->delete();
+        return redirect()->view('supporters.index');
 
     }
      function show($id){
@@ -54,10 +55,10 @@ class SupporterController extends Controller
         ]);
 
         if(request()->avatar){
-            $supporter->update(['image'=>$request->file('avatar')->store('uploads','public')]);
+            $supporter->update(['avatar'=>$request->file('avatar')->store('uploads','public')]);
             }
           else
-          $supporter->update(['image'=>'/storage/uploads/default.jpeg']);
+          $supporter->update(['avatar'=>'/storage/uploads/default.jpeg']);
        
         $supporter->assignRole('Supporter');
         $course= Course::get()->where('name',request()->assign_supporter);
@@ -89,7 +90,7 @@ class SupporterController extends Controller
             unlink(public_path()."/storage/".$supporter['avatar']); 
         }
         else
-          $supporter->update(['image'=>'/storage/uploads/default.jpeg']);
+          $supporter->update(['avatar'=>'/storage/uploads/default.jpeg']);
     
     }
         $supporter->save();

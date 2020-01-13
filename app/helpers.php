@@ -17,6 +17,23 @@ if(auth()->user()->isNotBanned()){
     
 
 }
+function add_teachers_to_sidebar(){
+  $teachers= User::get()->where('role','Teacher');
+
+    foreach($teachers as $teacher){
+   echo(   '
+    <li class="nav-item">
+                    <a href="/teachers/'.$teacher["id"].'" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>'.$teacher["name"].'</p>
+                    </a>
+                  </li>' )
+  ;
+
+    }}
+    
+
+
 function coursesComments($comments){
   $userComment=false;
   $courses=auth()->user()->courses;

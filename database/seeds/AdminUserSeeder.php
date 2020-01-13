@@ -21,6 +21,7 @@ class AdminUserSeeder extends Seeder
             'role'=>'Admin',
             
 
+
         ]);
         $role = Role::create(['name' => 'Admin']);
        $role->givePermissionTo(Permission::all());

@@ -36,7 +36,6 @@ class HomeController extends Controller
     public function showComments(){
         $comments=Comment::get()->where('status',0);
         $userComments=coursesComments($comments);
-       
         return view('comments',['comments'=>$userComments]);
         
 
