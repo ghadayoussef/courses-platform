@@ -1,5 +1,6 @@
 <?php
 use App\User;
+use App\Course;
 function add_supporters_to_sidebar(){
   $supporters = User::get()->where('role','Supporter');
 if(auth()->user()->isNotBanned()){
@@ -31,6 +32,20 @@ function add_teachers_to_sidebar(){
   ;
 
     }}
+    function add_courses_to_sidebar(){
+      $courses= Course::get();
+    
+        foreach($courses as $course){
+       echo(   '
+        <li class="nav-item">
+                        <a href="/courses/'.$course["id"].'" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>'.$course["name"].'</p>
+                        </a>
+                      </li>' )
+      ;
+    
+        }}
     
 
 

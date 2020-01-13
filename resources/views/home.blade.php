@@ -6,4 +6,5 @@
         <h1> you are banned from system</h1>
         </center>
         @endif
+        
 @endsection
