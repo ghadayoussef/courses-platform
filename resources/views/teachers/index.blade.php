@@ -41,13 +41,13 @@
         <a class="btn btn-primary" style="align" href="{{route('teachers.show',['teacher' => $teacher['id']])}}" role="button">Show</a>
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <button  class="btn btn-danger deleteRecord" data-id= "{{$teacher['id']}}" onclick='return confirm("Are you sure to delete this User?");'>Delete </button>
+        <button  class="btn btn-danger deleteRecord" data-id= "{{$teacher['id']}}">Delete </button>
         <!-- <meta name="csrf-token" content="{{ csrf_token() }}">
         <button class="btn bg-danger" data-id="{{$teacher['id']}}" id="delete">Delete</button> -->
        <!-- @method('delete')
        
         @csrf  -->
-            </from>       
+            </form>       
       </td> 
     </tr>
     @endforeach
@@ -60,26 +60,56 @@
     var id = $(this).data("id");
     var token = $("meta[name='csrf-token']").attr("content");
 
-    $.ajax(
-    {
-        //url:"{{route('teachers.destroy',['teacher' => 'id'])}}",
-        url: "/teachers/"+$(this).data("id"),
-        type: 'DELETE',
-        data: {
-            "id": $(this).data("id"),
-            "_token": $("meta[name='csrf-token']").attr("content"),
-        },
-        success: function (){
-          console.log("it Works");
-        },
-        error: function() {             
-           alert("errrorrr");
-        }
-    });
+
+    $.ajax({ url: `/teachers/${$(this).data("id")}`, method: "DELETE" })
+            .then(function (data) {
+              console.log("it Works");
+            })
+            .catch(function (err) {
+              console.log("error hena");
+            });
+
+    // $.ajax(
+    // {
+    //     url: "/teachers/"+id,
+    //     type: "POST",
+    //     // data: {
+    //     //     "id": id,
+    //     //     "_token": token,
+    //     // },
+    //     data: {
+    //       "id": id ,
+    //       _method: "DELETE"
+    //       },
+    //     headers: {
+    //       'X-CSRF-TOKEN': token
+    //        },
+    //     success: function (){
+    //       console.log("it Works");
+    //     },
+    //     error: function() {             
+    //        console.log('error');
+    //     }
+    // });
    
-});
+})
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 @endsection
+
+
+
 
 
 

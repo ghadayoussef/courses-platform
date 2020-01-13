@@ -84,8 +84,7 @@ $(document).on('click', '.delete', function(){
         if(confirm("Are you sure you want to Delete this data?"))
         {           
             $.ajax({
-                url:"{{route('ajaxdata.removedata',['teacher' => $(this).attr('id')])}}",
-                //url:"/ajaxdata/removedata/"+$(this).attr('id'),                
+                url:"/ajaxdata/removedata/"+$(this).attr('id'),                
                 method:'GET',
                 data:{
                     "teacher": $(this).attr('id'),

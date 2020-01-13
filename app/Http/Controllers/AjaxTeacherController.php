@@ -10,7 +10,7 @@ class AjaxTeacherController extends Controller
 {
     function index()
     {
-        return view('teachers.ajax_index',['teachers' => User::where('role','Teacher')->get()]);
+        return view('teachers.ajax_index',['teachers' => User::get()->where('role','Teacher')]);
     }
     function getdata(){
         $teachers = User::select('id','name','email','avatar','national_id');

@@ -50,8 +50,11 @@ class TeacherController extends Controller
 
         function destroy($id){
             dd("hi");
-            $teacher = User::destroy($id);
-            return redirect()->route('teachers.index');
+            $teacher = User::find($id);
+            $teacher->delete($id);
+            // $teacher = User::destroy($id);
+            //return redirect()->route('teachers.index');
+            return ['success' => true];
         }
 
         function edit($id){
