@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::group(['middleware'=>['auth']],function(){
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/supporters','SupporterController@index')->name('supporters.index')->middleware('forbid-banned-user');
+Route::get('/supporters/comments','HomeController@showComments');
+Route::get('/supporters/{comment}/approve','HomeController@approveComment');
+Route::get('/supporters/{comment}/disapprove','HomeController@disApproveComment');
 Route::get('/supporters/{supporter}','SupporterController@show')->name('supporters.show')->middleware('forbid-banned-user');
 });
 Route::group(['middleware'=>['auth','role:Admin|Teacher']],function(){
@@ -26,6 +29,8 @@ Route::group(['middleware'=>['auth','role:Admin|Teacher']],function(){
     Route::get('/supporters/{supporter}/edit','SupporterController@edit');
     Route::post('/supporters/{supporter}','SupporterController@update');
     Route::get('/supporters/{supporter}/ban','SupporterController@ban');
+ 
+
 
 });
 

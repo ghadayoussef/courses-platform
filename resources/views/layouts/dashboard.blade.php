@@ -185,7 +185,7 @@ to get the desired effect
          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Teachers
                 <i class="fas fa-angle-left right"></i>
@@ -233,7 +233,7 @@ to get the desired effect
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-user-edit"></i>
               <p>
                 Supporters
                 <i class="right fas fa-angle-left"></i>
@@ -253,7 +253,7 @@ to get the desired effect
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-book-open"></i>
               <p>
                 Courses
                 <i class="fas fa-angle-left right"></i>
@@ -310,40 +310,18 @@ to get the desired effect
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Comments
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
+       
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>General Elements</p>
+                <a href="/supporters/comments" class="nav-link">
+                  <i class="far fa-comment-dots nav-icon"></i>
+                  <p>Comments</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Editors</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-              <p>
-                Tables
+              <p>Tables 
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
