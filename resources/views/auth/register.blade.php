@@ -62,8 +62,8 @@
                         </div>
 
                         <div class="form-group row">
-                        <input type="radio" name="job" value="Teacher"> Teacher<br>                    
-                        <input type="radio" name="job" value="Supporter"> Supporter<br>
+                        <input type="radio" name="role" value="Teacher"> Teacher<br>                    
+                        <input type="radio" name="role" value="Supporter"> Supporter<br>
                         </div>
 
                         <div class="form-group row mb-0">

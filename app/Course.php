@@ -22,7 +22,7 @@ class Course extends Model
         return $this->hasMany(Comment::class);
     }
     protected $fillable = [
-        'name', 'price', 'start_date','end_date','image','teacher_id','supporter_id'
+        'name', 'price', 'start_date','end_date','image','user_id'
     ];
     
 }
