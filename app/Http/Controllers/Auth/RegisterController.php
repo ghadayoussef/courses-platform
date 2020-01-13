@@ -67,24 +67,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //dd($data['job']);
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => $data['role']
         ]);
-        //$user->role()->attach($data['role']);
         if($data['role']=='Teacher')
         {
             $user->assignRole('Teacher');
-            dd($user->getAllPermissions());
             return $user;
         }
         else if($data['role']=='Supporter')
         {
             $user->assignRole('Supporter');
-            dd($user->getAllPermissions());
             return $user;
         }
         

@@ -10,8 +10,11 @@ class Course extends Model
     public function user(){
         return $this-> belongsToMany(User::class);
     }
+    public function student(){
+        return $this-> belongsToMany(Student::class);
+    }
     protected $fillable = [
-        'name', 'price', 'start_date','end_date','image','teacher_id','supporter_id'
+        'name', 'price', 'start_date','end_date','image','teacher_id'
     ];
     
 }

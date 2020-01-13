@@ -9,33 +9,32 @@
         </ul>
     </div>
 @endif
-<h4 class="text-dark"> Create New Course: <h4>
+<h4 class="text-dark"> Edit Course: <h4>
 
-<form style="margin-left:20px;" method="POST" action="/courses" enctype="multipart/form-data">
+<form method="POST" action="/courses/{{$course->id}}" enctype="multipart/form-data">
+@method('patch')
  @csrf
   <div class="form-group">
     <label>Course Name</label>
-    <input name="name" type="text" class="form-control" id="exampleInputPassword1">
+    <input value="{{$course->name}}" name="name" type="text" class="form-control" id="exampleInputPassword1">
   </div>
   <div class="form-group">
     <label>Cover Image</label>
-    <input name ="image" type="file" class=" btn form-control-file" accept="image/jpg,image/png">
+    <input  name ="image" type="file" class=" btn form-control-file" accept="image/jpg,image/png">
   </div>
   <div class="form-group">
     <label>Price</label>
-    <input name ="price" type="number" step="0.01" class="form-control" id="exampleInputPassword1">
+    <input value="{{($course->price)/100}}" name ="price" type="number" step="0.01" class="form-control" id="exampleInputPassword1">
   </div>
   
   <div class="form-group">
     <label>Start Date</label>
-    <input name="start_date" type="date" class="form-control" id="exampleInputPassword1">
+    <input value="{{$course->start_date}}" name="start_date" type="date" class="form-control" id="exampleInputPassword1">
   </div>
   <div class="form-group">
     <label>End Date</label>
-    <input name="end_date" type="date" class="form-control" id="exampleInputPassword1">
+    <input value="{{$course->end_date}}" name="end_date" type="date" class="form-control" id="exampleInputPassword1">
   </div> 
-
-  @role('Admin')
   <div class="form-group">
     <label>Select Teacher</label>
     <select name="teacher_id" class="mdb-select md-form">
@@ -45,8 +44,6 @@
   @endforeach
 </select>
   </div> 
-  @endrole
-  
   <div class="form-group">
     <label>Select Supporter</label>
     <select name="supporter_id" class="mdb-select md-form">

@@ -161,6 +161,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
+
+
+
 
         /*
          * Package Service Providers...
@@ -230,6 +236,12 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class
+
+
+
 
     ],
 

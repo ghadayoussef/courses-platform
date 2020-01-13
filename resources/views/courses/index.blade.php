@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-  <title>AdminLTE 3 | Dashboard 3</title>
-
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="{{asset('bower_components/admin-lte/plugins/fontawesome-free/css/all.min.css')}}">
-  <!-- IonIcons -->
-  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('bower_components/admin-lte/dist/css/adminlte.min.css')}}">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body>
-
+@extends('layouts.dashboard')
+@section('content')
 <div> 
+@role('Admin|Teacher')
 <a class="btn btn-success btn-lg" style="align:center;" href="courses/create" role="button">Create Course</a>
+@endrole
 </div>
 <table class="table table-bordered">
                   <thead>                  
@@ -31,7 +14,10 @@
                       <th>Price</th>
                       <th>Start Date</th>
                       <th>End Date</th>
+                      @role('Admin')
                       <th>Teacher Name<th>
+                      @endrole
+                      <th>Actions<th>
                     </tr>
                   </thead>
                   <tbody>
@@ -45,35 +31,47 @@
             <td> <p class="text-danger">{{($course->price)/100}}$<p></td>
             <td>{{$course->start_date}}</td>
             <td>{{$course->end_date}}</td>
+            @hasrole('Admin')
             @foreach($course->user as $user)
             @if($user->role=='Teacher')
            <td>{{ $user->name }}</td>
            @endif
             @endforeach
+           @endhasrole
             <td><a class="btn btn-primary"href="{{route('courses.show', $course->id)}}">View</a>
-
+           @role('Admin|Teacher')
            <a  class="btn btn-warning" href="{{route('courses.edit',$course->id )}}">Edit</a>
-        <form style="display:inline;" action="{{ route('courses.destroy', $course->id)}}" method="post">
-  <input onclick='return confirm("Are you sure?")' class="btn btn-danger" type="submit" value="Delete" />
-   @method('delete')
-   @csrf
-   </form>
+<form method="post" style="display:inline">
+<button class="delete btn btn-danger" data-id="{{$course->id}}" >Delete</button>
+</form>
 </td>
+@endrole
 
           </tr>
 @endforeach
    </tbody>
 </table>
-
-<!-- jQuery -->
-<script src="{{asset('bower_components/admin-lte/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap -->
-<script src="{{asset('bower_components/admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE -->
-<script src="{{asset('bower_components/admin-lte/dist/js/adminlte.js')}}"></script>
-<!-- OPTIONAL SCRIPTS -->
-<script src="{{asset('bower_components/admin-lte/plugins/chart.js/Chart.min.js')}}"></script>
-<script src="{{asset('bower_components/admin-lte/dist/js/demo.js')}}"></script>
-<script src="{{asset('bower_components/admin-lte/dist/js/pages/dashboard3.js')}}"></script>
-</body>
-</html>
+@section('scripts')
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script>
+$(".delete").click(function(){
+    var id = $(this).data("id");
+    var token = $("meta[name='csrf-token']").attr("content");
+   
+    $.ajax(
+    {
+        url: "/courses/"+id,
+        type: 'DELETE',
+        data: {
+            "id": id,
+            "_token": token,
+        },
+        success: function (){
+            console.log("deleted");
+        }
+    });
+   
+});
+</script>
+@endsection
+@endsection
