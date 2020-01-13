@@ -30,7 +30,6 @@ class SupporterController extends Controller
       
         }
         $supporter->delete();
-        return redirect()->route('supporters.index');
 
     }
      function show($id){

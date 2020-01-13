@@ -28,7 +28,7 @@
         <div class="col-12">
           <div class="card">
            
-            <div class="card-body">
+            <div class="card-body" id="table">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -99,7 +99,7 @@
             "_token": token,
         },
         success: function (){
-          console.log("it Works");
+          $("#table").reload();
         }
     });
    
