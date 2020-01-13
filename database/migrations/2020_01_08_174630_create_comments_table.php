@@ -18,10 +18,10 @@ class CreateCommentsTable extends Migration
             $table->string('body');
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('supporter_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('student_id')->references('id')->on('students');
             $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('supporter_id')->references('id')->on('supporters');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->boolean('status');//approved or not approved
             $table->timestamps();
         });

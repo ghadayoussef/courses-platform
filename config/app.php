@@ -161,7 +161,14 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Cog\Laravel\Ban\Providers\BanServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
+
+
+
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -171,9 +178,15 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        Spatie\Permission\PermissionServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+
+
+
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
 
@@ -225,6 +238,16 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class
+
+
+
+
+
 
     ],
 
