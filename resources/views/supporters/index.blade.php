@@ -64,6 +64,12 @@
                   <a href="/supporters/{{$supporter['id']}}/edit" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Edit</a> 
                   <meta name="csrf-token" content="{{ csrf_token() }}">
                   <button  class="btn btn-danger deleteRecord" data-id={{$supporter['id']}} onclick='return confirm("Are you sure to delete this User?");'>Delete </button>
+                  @if($supporter->isBanned())
+                  <a href="/supporters/{{$supporter['id']}}/ban" class="btn btn-dark text-light" tabindex="-1" role="button" aria-disabled="true">UnBan</a> 
+                   @else
+                   <a href="/supporters/{{$supporter['id']}}/ban" class="btn btn-dark text-light" tabindex="-1" role="button" aria-disabled="true">Ban</a> 
+                   @endif
+
                   </form>
                   </td>
                   @endrole
@@ -76,8 +82,6 @@
     </section>
     <!-- /.content -->
   </div>
-  
-
 
 @endsection
 @section('scripts')

@@ -2,7 +2,7 @@
 use App\User;
 function add_supporters_to_sidebar(){
   $supporters = User::get()->where('role','Supporter');
-
+if(auth()->user()->isNotBanned()){
     foreach($supporters as $supporter){
    echo(   '
     <li class="nav-item">
@@ -13,6 +13,6 @@ function add_supporters_to_sidebar(){
                   </li>' )
   ;
 
-    }
+    }}
 
 }

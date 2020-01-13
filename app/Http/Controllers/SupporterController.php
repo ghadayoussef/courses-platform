@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 use App\Course;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
-
+use Bannable;
 
 class SupporterController extends Controller
 {  
@@ -94,6 +94,17 @@ class SupporterController extends Controller
     }
         $supporter->save();
         return redirect()->route('supporters.index');
+
+    }
+    function ban($id){
+        $supporter = User::findOrFail($id);
+        if($supporter->isBanned())
+        $supporter->unban();
+        else
+        $supporter->ban();
+
+        return redirect()->route('supporters.index');
+
 
     }
 
