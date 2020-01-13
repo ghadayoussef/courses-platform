@@ -35,7 +35,9 @@ class HomeController extends Controller
     }
     public function showComments(){
         $comments=Comment::get()->where('status',0);
-        return view('comments',['comments'=>$comments]);
+        $userComments=coursesComments($comments);
+       
+        return view('comments',['comments'=>$userComments]);
         
 
 
@@ -43,7 +45,7 @@ class HomeController extends Controller
     public function approveComment($id){
         $comment=Comment::findOrFail($id);
         $comment->update(['status'=>1]);
-        return back();
+         return back();
 
     }
     public function disApproveComment($id){

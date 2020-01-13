@@ -14,5 +14,28 @@ if(auth()->user()->isNotBanned()){
   ;
 
     }}
+    
 
 }
+function coursesComments($comments){
+  $userComment=false;
+  $courses=auth()->user()->courses;
+  $currentComment=0;
+  foreach($comments as $index=>$comment)
+  { 
+    foreach($courses as $index=>$course)
+    {
+     if($comment->course_id==$course->id)
+     $userComment=true;
+    
+
+    }
+    if($userComment==false)
+    unset($comments[$currentComment]);
+    else
+    $userComment==false;
+    $currentComment++;
+  }
+  return $comments;
+}
+

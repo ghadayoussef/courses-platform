@@ -13,6 +13,7 @@ use Bannable;
 class SupporterController extends Controller
 {  
      function index(){
+         
        
         $supporters = User::get()->where('role','Supporter');
 
