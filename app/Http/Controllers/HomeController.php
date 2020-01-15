@@ -35,8 +35,15 @@ class HomeController extends Controller
     }
     public function showComments(){
         $comments=Comment::get()->where('status',0);
-        $userComments=coursesComments($comments);
-        return view('comments',['comments'=>$userComments]);
+        if(auth()->user()->isBanned()){
+            $userComments=coursesComments($comments);
+            return view('comments',['comments'=>$userComments]);
+        }
+        else
+        return view('comments',['comments'=>$comments]);
+
+        
+        
         
 
 

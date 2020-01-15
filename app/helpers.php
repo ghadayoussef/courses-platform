@@ -34,7 +34,7 @@ function add_teachers_to_sidebar(){
     }}
     function add_courses_to_sidebar(){
       $courses= Course::get();
-    
+      if(auth()->user()->isNotBanned()){
         foreach($courses as $course){
        echo(   '
         <li class="nav-item">
@@ -45,7 +45,7 @@ function add_teachers_to_sidebar(){
                       </li>' )
       ;
     
-        }}
+        }}}
     
 
 
@@ -54,7 +54,7 @@ function coursesComments($comments){
   $courses=auth()->user()->courses;
   $currentComment=0;
   foreach($comments as $index=>$comment)
-  { 
+  { if(auth()->user())
     foreach($courses as $index=>$course)
     {
      if($comment->course_id==$course->id)

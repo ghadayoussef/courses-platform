@@ -55,7 +55,7 @@ Auth::routes();
 
 
 
- Auth::routes();
+
 
  Route::group(['middleware'=>['auth','role:Admin|Teacher']], function(){
     Route::get('/courses/create' ,'CourseController@create')->name('courses.create');

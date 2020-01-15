@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\User;
 use File;
@@ -28,19 +27,11 @@ class TeacherController extends Controller
         $teacher->national_id = $request->national_id;
         $teacher->role = "Teacher";
         $teacher->assignRole('Teacher');
-        if ($request->hasFile('avatar')) {
-            $file = $request->avatar;
-            $extension = $file->getClientOriginalExtension();
-            $filename = time(). "." .$extension;
-            $file->move("uploads/teacher/",$filename);
-            $teacher->avatar = $filename;
-        }else{
-           
-            $teacher->avatar ='/storage/uploads/default.jpeg';
-
-
-        }
+    
         $teacher->save();
+        if(request()->avatar){
+            $teacher->update(['avatar'=>$request->file('avatar')->store('uploads','public')]);
+            }
         return redirect()->route('teachers.index');
         }
 
@@ -50,7 +41,7 @@ class TeacherController extends Controller
         }
 
         function destroy($id){
-            dd("hi");
+           
             $teacher = User::destroy($id);
             return redirect()->route('teachers.index');
         }
@@ -69,19 +60,19 @@ class TeacherController extends Controller
             $teacher->national_id = $request->national_id;
             $teacher->role = "Teacher";
             $teacher->assignRole('Teacher');
-            if($request->avatar){
-                if ($request->hasFile('avatar')) {
-                $file = $request->avatar;
-                $extension = $file->getClientOriginalExtension();
-                $filename = time(). "." .$extension;
-                $file->move("uploads/teacher/",$filename);
-                $teacher->avatar = $filename;
-                }
+            if( $request->avatar){
+                unlink(public_path()."/storage/".$teacher['avatar']);
+                $teacher->update(['avatar'=> $request->file('avatar')->store('uploads','public')]);
+             }
             else{
-                $teacher->avatar = "default.png";
-                }
-            }            
+                if($teacher->avatar)
+                unlink(public_path()."/storage/".$teacher['avatar']); 
+            
+            else
+              $teacher->update(['avatar'=>'/storage/uploads/default.jpeg']);
+            }    
             $teacher->save();
+           
             return redirect()->route('teachers.index');    
         }
-}
+    }

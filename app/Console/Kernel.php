@@ -7,7 +7,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Notification;
 use App\Student;
 use Carbon\Carbon;
-
 class Kernel extends ConsoleKernel
 {
 
@@ -17,7 +16,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\SendEmails::class,
+        
     ];
 
     /**
